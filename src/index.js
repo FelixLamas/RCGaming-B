@@ -2,9 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
-
+const dataBaseC = require("./dbConection.js");
 const app = express();
 require("dotenv").config();
+dataBaseC();
 app.set("port", process.env.PORT || 5000);
 app.listen(app.get("port"), () => {
   console.log("Backend del proyecto escuchando en el puerto:", app.get("port"));
