@@ -1,0 +1,29 @@
+function validateName(name) {
+  if (name.length >= 4 && name.length <= 50) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validateCategory(category) {
+  return category.length !== 0 && category !== undefined;
+}
+
+function validateDescription(description) {
+  return description.length >= 4 && description.length <= 500;
+}
+
+function validatePrice(price) {
+  return price >= 100;
+}
+function validateStock(stock) {
+  return stock >= 1;
+}
+module.exports = {
+  validateName,
+  validateCategory,
+  validateDescription,
+  validatePrice,
+  validateStock,
+};
