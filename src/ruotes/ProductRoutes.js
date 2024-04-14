@@ -5,8 +5,15 @@ const ProductRoutes = (base, app) => {
 
   app.post(`${base}`, async (req, res) => {
     try {
-      const { name, category, description, price, stock } = req.body;
-      await prodController.Create(name, category, description, price, stock);
+      const { name, category, description, price, stock, imageUrl } = req.body;
+      await prodController.Create(
+        name,
+        category,
+        description,
+        price,
+        stock,
+        imageUrl
+      );
       res.status(201).json({ mesage: "Existo al crear el producto" });
     } catch (error) {
       console.error("Error al crear el producto", error);

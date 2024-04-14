@@ -20,10 +20,16 @@ function validatePrice(price) {
 function validateStock(stock) {
   return stock >= 1;
 }
+
+function validateImageUrl(imageUrl) {
+  const regexUrl = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
+  return regexUrl.test(imageUrl);
+}
 module.exports = {
   validateName,
   validateCategory,
   validateDescription,
   validatePrice,
   validateStock,
+  validateImageUrl,
 };

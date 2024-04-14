@@ -5,10 +5,11 @@ const {
   validateDescription,
   validatePrice,
   validateStock,
+  validateImageUrl,
 } = require("../util/helpers");
 
 class ProductController {
-  async Create(name, category, description, price, stock) {
+  async Create(name, category, description, price, stock, imageUrl) {
     if (!validateName(name)) {
       throw new Error("Nombre del producto invalido.");
     }
@@ -23,6 +24,9 @@ class ProductController {
     }
     if (!validateStock(stock)) {
       throw new Error("Stock del producto invalido.");
+    }
+    if (!validateImageUrl(imageUrl)) {
+      throw new Error("URL de la imagen del producto invalida.");
     }
     try {
       const newProduct = new ProductModel({
