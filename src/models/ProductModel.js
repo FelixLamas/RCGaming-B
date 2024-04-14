@@ -35,7 +35,6 @@ const ProductSchema = new Schema({
   imageUrl: {
     type: String,
     require: [true, "La imagen del producto es requerida"],
-    min: 1,
   },
 });
 

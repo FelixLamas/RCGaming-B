@@ -35,6 +35,7 @@ class ProductController {
         description: description,
         price: price,
         stock: stock,
+        imageUrl: imageUrl,
       });
 
       await newProduct.save();
