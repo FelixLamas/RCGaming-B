@@ -25,6 +25,10 @@ function validateImageUrl(imageUrl) {
   const regexUrl = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
   return regexUrl.test(imageUrl);
 }
+
+function validateCharacteristic(characteristic) {
+  return characteristic.length >= 4 && characteristic.length <= 1000;
+}
 module.exports = {
   validateName,
   validateCategory,
@@ -32,4 +36,5 @@ module.exports = {
   validatePrice,
   validateStock,
   validateImageUrl,
+  validateCharacteristic,
 };

@@ -36,6 +36,15 @@ const ProductSchema = new Schema({
     type: String,
     require: [true, "La imagen del producto es requerida"],
   },
+  characteristic: {
+    type: String,
+    require: [true, "La imagen del producto es requerida"],
+    minLength: 4,
+    maxLength: 1000,
+  },
+  outstanding: {
+    type: Boolean,
+  },
 });
 
 const ProductModel = mongoose.model("product", ProductSchema);
