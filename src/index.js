@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
 const dataBaseC = require("./dbConection.js");
+const ProductRoutes=require('./routes/ProductRoutes.js');
 const app = express();
 require("dotenv").config();
 dataBaseC();
@@ -26,3 +27,6 @@ app.get("/test", async (req, res) => {
     console.error(error);
   }
 });
+
+
+ProductRoutes('/products', app);
