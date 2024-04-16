@@ -8,11 +8,9 @@ const ProductSchema = new Schema({
     minLength: 4,
     maxLength: 50,
   },
-  category: {
+  category_Id: {
     type: String,
     require: [true, "La categoria del producto es requerida"],
-    minLength: 4,
-    maxLength: 100,
   },
   description: {
     type: String,
@@ -36,12 +34,13 @@ const ProductSchema = new Schema({
     type: String,
     require: [true, "La imagen del producto es requerida"],
   },
-  characteristic: {
-    type: String,
-    require: [true, "La imagen del producto es requerida"],
-    minLength: 4,
-    maxLength: 1000,
-  },
+  characteristic: [
+    {
+      type: String,
+      minLength: 4,
+      maxLength: 1000,
+    },
+  ],
   outstanding: {
     type: Boolean,
   },

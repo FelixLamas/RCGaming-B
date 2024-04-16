@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const path = require("path");
 const dataBaseC = require("./dbConection.js");
 const app = express();
-const ProductRoutes = require("./ruotes/ProductRoutes.js");
+const ProductRoutes = require("./routes/ProductRoutes.js");
 
 require("dotenv").config();
 dataBaseC();

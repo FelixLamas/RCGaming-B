@@ -7,7 +7,7 @@ const ProductRoutes = (base, app) => {
     try {
       const {
         name,
-        category,
+        category_Id,
         description,
         price,
         stock,
@@ -17,7 +17,7 @@ const ProductRoutes = (base, app) => {
       } = req.body;
       await prodController.Create(
         name,
-        category,
+        category_Id,
         description,
         price,
         stock,

@@ -12,7 +12,7 @@ const {
 class ProductController {
   async Create(
     name,
-    category,
+    category_Id,
     description,
     price,
     stock,
@@ -23,7 +23,7 @@ class ProductController {
     if (!validateName(name)) {
       throw new Error("Nombre del producto invalido.");
     }
-    if (!validateCategory(category)) {
+    if (!validateCategory(category_Id)) {
       throw new Error("Categoria del producto invalida.");
     }
     if (!validateDescription(description)) {
@@ -44,7 +44,7 @@ class ProductController {
     try {
       const newProduct = new ProductModel({
         name: name,
-        category: category,
+        category_Id: category_Id,
         description: description,
         price: price,
         stock: stock,
