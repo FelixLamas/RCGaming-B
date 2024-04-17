@@ -1,4 +1,3 @@
-
 function validateName(name) {
   if (name.length >= 4 && name.length <= 50) {
     return true;
@@ -28,7 +27,7 @@ function validateImageUrl(imageUrl) {
 }
 
 function validateCharacteristic(characteristic) {
-  return characteristic.length >= 4 && characteristic.length <= 1000;
+  return characteristic.length >= 1;
 }
 module.exports = {
   validateName,
@@ -38,5 +37,4 @@ module.exports = {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
-
 };
