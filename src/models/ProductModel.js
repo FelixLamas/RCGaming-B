@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ProductSchema = new Schema({
+
   name: {
     type: String,
     require: [true, "El nombre del producto es requerido"],
@@ -44,8 +45,11 @@ const ProductSchema = new Schema({
   outstanding: {
     type: Boolean,
   },
+
 });
 
 const ProductModel = mongoose.model("product", ProductSchema);
 
+
 module.exports = ProductModel;
+

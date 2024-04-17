@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
 const dataBaseC = require("./dbConection.js");
+const ProductRoutes=require('./routes/ProductRoutes.js');
 const app = express();
 const ProductRoutes = require("./routes/ProductRoutes.js");
 
@@ -20,4 +21,17 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, "../public")));
 
+
+//ruta de prueba para el back
+app.get("/test", async (req, res) => {
+  try {
+    return res.status(200).json({ mesage: "realizo la consulta ok" });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
+
 ProductRoutes("/products", app);
+
