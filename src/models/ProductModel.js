@@ -44,6 +44,13 @@ const ProductSchema = new Schema({
   outstanding: {
     type: Boolean,
   },
+  stockUpdateDate: {
+    type: Date,
+    require: [
+      true,
+      "La fecha de actualizacion del stock del producto es requerida",
+    ],
+  },
 });
 
 const ProductModel = mongoose.model("product", ProductSchema);
