@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const path = require("path");
 const dataBaseC = require("./dbConection.js");
 const ProductRoutes = require("./routes/ProductRoutes.js");
+const UserRoutes = require("./routes/UserRoutes.js");
 const app = express();
 
 require("dotenv").config();
@@ -14,7 +15,7 @@ app.listen(app.get("port"), () => {
 });
 
 app.use(express.json());
-app.use(express.urlencoded({ extends: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
@@ -29,4 +30,5 @@ app.get("/test", async (req, res) => {
   }
 });
 
+UserRoutes("/users", app);
 ProductRoutes("/products", app);
