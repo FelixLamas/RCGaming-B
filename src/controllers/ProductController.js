@@ -8,6 +8,7 @@ const {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
+  validateStockUpdateDate,
 } = require("../util/helpers");
 
 class ProductController {
@@ -19,7 +20,8 @@ class ProductController {
     stock,
     imageUrl,
     characteristic,
-    outstanding
+    outstanding,
+    stockUpdateDate
   ) {
     if (!validateName(name)) {
       throw new Error("Nombre del producto invalido.");
@@ -39,8 +41,11 @@ class ProductController {
     if (!validateImageUrl(imageUrl)) {
       throw new Error("URL de la imagen del producto invalida.");
     }
-    if (!validateCharacteristic) {
+    if (!validateCharacteristic(characteristic)) {
       throw new Error("La catasreristica del producto invalida.");
+    }
+    if (!validateStockUpdateDate(stockUpdateDate)) {
+      throw new Error("La fecha de actualizacion del producto invalida.");
     }
     try {
       const newProduct = new ProductModel({
@@ -52,6 +57,7 @@ class ProductController {
         imageUrl: imageUrl,
         characteristic: characteristic,
         outstanding: outstanding,
+        stockUpdateDate: stockUpdateDate,
       });
 
       await newProduct.save();

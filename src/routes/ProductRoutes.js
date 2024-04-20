@@ -14,6 +14,7 @@ const ProductRoutes = (base, app) => {
         imageUrl,
         characteristic,
         outstanding,
+        stockUpdateDate,
       } = req.body;
       await prodController.Create(
         name,
@@ -23,7 +24,8 @@ const ProductRoutes = (base, app) => {
         stock,
         imageUrl,
         characteristic,
-        outstanding
+        outstanding,
+        stockUpdateDate
       );
       res.status(201).json({ mesage: "Existo al crear el producto" });
     } catch (error) {

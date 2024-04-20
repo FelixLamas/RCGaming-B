@@ -11,7 +11,7 @@ function validatePassword(password){
 
 
 function validateName(name) {
-  if (name.length >= 4 && name.length <= 50) {
+  if (name.trim().length >= 4 && name.trim().length <= 50) {
     return true;
   } else {
     return false;
@@ -19,11 +19,11 @@ function validateName(name) {
 }
 
 function validateCategory(category) {
-  return category.length !== 0 && category !== undefined;
+  return category.trim().length !== 0 && category !== undefined;
 }
 
 function validateDescription(description) {
-  return description.length >= 4 && description.length <= 500;
+  return description.trim().length >= 4 && description.trim().length <= 500;
 }
 
 function validatePrice(price) {
@@ -39,7 +39,17 @@ function validateImageUrl(imageUrl) {
 }
 
 function validateCharacteristic(characteristic) {
-  return characteristic.length >= 1;
+  characteristic.forEach((element) => {
+    if (element.trim().length === 0) {
+      return false;
+    }
+  });
+  return true;
+}
+
+function validateStockUpdateDate(stockUpdateDate) {
+  const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
+  return regexFecha.test(stockUpdateDate) && stockUpdateDate > "2024-04-16";
 }
 module.exports = {
   validateName,
@@ -49,6 +59,8 @@ module.exports = {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
+  validateStockUpdateDate,
   validateEmail,
   validatePassword
+
 };
