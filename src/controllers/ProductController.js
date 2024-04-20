@@ -60,6 +60,18 @@ class ProductController {
     }
   }
 
+  async GetNewsProducts(){
+    try {
+      let ProductsNews = [];
+
+      ProductsNews = await ProductModel.find({ outstanding: true });
+
+      return ProductsNews;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async GetAllCategories() {
     try {
       let CategoriesResp = [];
