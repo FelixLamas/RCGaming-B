@@ -49,6 +49,16 @@ class UserController{
         }
     }
 
+    async DeleteUser(id){
+        try {
+            const deleteUser = await userModel.findByIdAndDelete(id);
+            return deleteUser
+        } catch (error) {
+            throw error
+        }
+
+    }
+
     }
 
 module.exports=UserController
