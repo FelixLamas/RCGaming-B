@@ -36,7 +36,31 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-  app.get(`${base}/categories`, async (req, res) => {
+
+  app.get(`${base}/:id`, async(req, res)=>{
+    try {
+        const {id}=req.params;
+        const response=await prodController.GetById(id);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error(`Error al obtener el producto con id`, error);
+        return res.status(500).json({message:"Ocurrio un error al intentar obtener el producto"}); 
+    }
+});
+
+  app.get(`${base}/news/product`, async (req, res) => {
+    try {
+      const response = await prodController.GetNewsProducts();
+      return res.status(200).json(response);
+    } catch (error) {
+      console.error("Error al obtener las productos destacados", error);
+      return res.status(500).json({
+        message: "Ocurrio un error al intentar obtener los productos destacados",
+      });
+    }
+  });
+
+  app.get(`${base}/categories/product`, async (req, res) => {
     try {
       const response = await prodController.GetAllCategories();
       return res.status(200).json(response);
