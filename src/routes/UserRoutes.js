@@ -24,6 +24,17 @@ const UserRoutes=(base, app)=>{
 
     })
 
+    app.delete(`${base}/delete/:id`, async(req, res)=>{
+        try {
+            const id= req.params.id
+            await userController.DeleteUser(id);
+            return res.status(200).json({message:"Exito al eliminar el usuario"})    
+        } catch(error){
+            return res.status(500).json({message:"Error al intentar eliminar el usuario"})
+
+        }
+    })
+
 }
 
 module.exports=UserRoutes
