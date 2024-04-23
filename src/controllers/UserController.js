@@ -1,4 +1,5 @@
 const userModel = require("../models/UserModel");
+const jwt=require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const {
   validatePassword,
@@ -36,27 +37,30 @@ class UserController {
   }
 
 
-    async Login(email, password) {
+    async Login(req, res) {
         try {
+          const body=req.body;
 
-
-
-            const user = await userModel.findOne({ email });
+            const user = await userModel.findOne({email: body.email });
 
             if (!user) {
-                throw new Error ("Usuario incorrecto")
+               return res.status(404).json({message: "Email y/o password incorrectos"});
             }
 
             if (user.isActive !== true) {
-                throw new Error ("Usuario inactivo por Admin")
+              return res.status(404).json({message: "Usuario inactivo por Admin"});
             }
 
-            const isPasswordValid = await bcrypt.compare(password, user.password);
+            const isPasswordValid = await bcrypt.compare(body.password, user.password);
             if (!isPasswordValid) {
-                throw new Error ("Contraseña invalida")
+              return res.status(404).json({message: "Email y/o password incorrectos"});
             }
+            const token=jwt.sign({
+              _id:user._id,                
+              role:user.role
+          }, process.env.SECRET_KEY, {expiresIn:'1D'});
 
-            return user;
+            return res.status(200).json({email:user.email, role:user.role, token:token});
         } catch (error) {
             throw error;
         }
@@ -94,6 +98,7 @@ class UserController {
         } catch (error) {
             throw error
         }
+      }
 
   async CreateNewAdmin(name, email, password) {
     try {
@@ -114,7 +119,13 @@ class UserController {
         password: hash,
         role: "admin",
         isActive: true,
-      });  
-}
+      }); 
+      const savedUser=await newUser.save();
+            return savedUser;
+        } catch (error) {
+            throw error
+        }
+    } 
+  }
 
 module.exports = UserController;
