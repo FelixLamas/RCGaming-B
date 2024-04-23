@@ -18,6 +18,16 @@ const UserSchema = new Schema({
     }
 });
 
+UserSchema.statics.modifyUser = async function(id, newData) {
+    try {
+        // Realizar la actualización del usuario
+        const updatedUser = await this.findByIdAndUpdate(id, newData, { new: true });
+        return updatedUser;
+    } catch (error) {
+        throw error;
+    }
+};
+
 const UserModel=mongoose.model("user", UserSchema);
 
 module.exports=UserModel

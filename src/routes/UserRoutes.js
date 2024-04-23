@@ -22,7 +22,20 @@ const UserRoutes=(base, app)=>{
             return res.status(500).json({message: "Ocurrio un error al intentar crear el usuario"})
         }
 
-    })
+    });
+
+
+    app.put(`${base}/modify/:id`, async (req, res) => {
+        try {
+            const id = req.params.id;
+            const newData = req.body; 
+            await userController.ModifyUser(id, newData);
+            return res.status(200).json({ message: "Exito al modificar el usuario" });
+        } catch (error) {
+            return res.status(500).json({ message: "Error al intentar modificar el usuario" });
+        }
+    });
+
 
     app.delete(`${base}/delete/:id`, async(req, res)=>{
         try {
@@ -33,7 +46,7 @@ const UserRoutes=(base, app)=>{
             return res.status(500).json({message:"Error al intentar eliminar el usuario"})
 
         }
-    })
+    });
 
 }
 
