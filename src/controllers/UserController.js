@@ -50,28 +50,42 @@ class UserController{
     }
 
 
-    async ModifyUser(id, newData) {
+    async ModifyUser(id, newData, requestingUser) {
         try {
-            const { email, password } = newData;
-            
-            if (email && !validateEmail(email)) {
+            if (requestingUser.role !== "admin") {
+                throw new Error("No tienes permiso para modificar usuarios");
+            }
+    
+            const user = await userModel.findById(id);
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+    
+            if (newData.isActive !== undefined) {
+                user.isActive = newData.isActive;
+            }
+    
+            if (newData.email && !validateEmail(newData.email)) {
                 throw new Error("Formato de email invalido");
             }
-            if (password && !validatePassword(password)) {
+            if (newData.password && !validatePassword(newData.password)) {
                 throw new Error("Formato de password incorrecto");
             }
-    
-            if (password) {
+            if (newData.password) {
                 const SALT = parseInt(process.env.BCRYPT_SALT);
-                newData.password = await bcrypt.hash(password, SALT);
+                newData.password = await bcrypt.hash(newData.password, SALT);
             }
     
-            const updatedUser = await userModel.findByIdAndUpdate(id, newData, { new: true });
+            Object.assign(user, newData);
+    
+            const updatedUser = await user.save();
             return updatedUser;
         } catch (error) {
             throw error;
         }
     }
+
+    
 
     async DeleteUser(id){
         try {

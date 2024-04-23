@@ -36,6 +36,16 @@ const UserRoutes=(base, app)=>{
         }
     });
 
+    app.put(`${base}/activate/:id`, async (req, res) => {
+        try {
+            const id = req.params.id;
+            const isActive = req.body.isActive; 
+            await userController.ActivateUser(id, isActive);
+            return res.status(200).json({ message: "Exito al cambiar el estado del usuario" });
+        } catch (error) {
+            return res.status(500).json({ message: "Error al intentar cambiar el estado del usuario" });
+        }
+    });
 
     app.delete(`${base}/delete/:id`, async(req, res)=>{
         try {

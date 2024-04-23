@@ -15,12 +15,15 @@ const UserSchema = new Schema({
     role:{
         type: String,
         required:[true, "El rol es requerido"]
+    },
+    isActive: {
+        type: Boolean,
+        default: true // Por defecto, el usuario está activo
     }
 });
 
 UserSchema.statics.modifyUser = async function(id, newData) {
     try {
-        // Realizar la actualización del usuario
         const updatedUser = await this.findByIdAndUpdate(id, newData, { new: true });
         return updatedUser;
     } catch (error) {
