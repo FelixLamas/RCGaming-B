@@ -58,6 +58,31 @@ const UserRoutes=(base, app)=>{
         }
     });
 
+
+    app.post(`${base}/login`, async (req, res) => {
+        try {
+            const { email, password } = req.body;
+
+            // Verificar correo electrónico y contraseña
+            const user = await userController.Login(email, password);
+
+            if (!user) {
+                return res.status(401).json({ message: "Correo electrónico o contraseña incorrectos" });
+            }
+
+            // Verificar estado del usuario
+            if (!user.isActive) {
+                return res.status(401).json({ message: "El usuario no está activo" });
+            }
+
+            // Inicio de sesión exitoso
+            return res.status(200).json({ message: "Inicio de sesión exitoso" });
+        } catch (error) {
+            return res.status(500).json({ message: "Error al intentar iniciar sesión" });
+            
+        }
+    });
+
 }
 
 module.exports=UserRoutes

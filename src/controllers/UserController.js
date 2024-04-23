@@ -49,6 +49,32 @@ class UserController{
         }
     }
 
+    async Login(email, password) {
+        try {
+
+
+
+            const user = await userModel.findOne({ email });
+
+            if (!user) {
+                throw new Error ("Usuario incorrecto")
+            }
+
+            if (user.isActive !== true) {
+                throw new Error ("Usuario inactivo por Admin")
+            }
+
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!isPasswordValid) {
+                throw new Error ("Contraseña invalida")
+            }
+
+            return user;
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
     async ModifyUser(id, newData) {
         try {
