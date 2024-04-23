@@ -32,7 +32,7 @@ const UserRoutes=(base, app)=>{
             await userController.ModifyUser(id, newData);
             return res.status(200).json({ message: "Exito al modificar el usuario" });
         } catch (error) {
-            return res.status(500).json({ message: "Error al intentar modificar el usuario" });
+            return res.status(500).json({ message: "Error al intentar modificar el usuario desde modify" });
         }
     });
 
