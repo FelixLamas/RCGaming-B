@@ -35,6 +35,40 @@ class UserController {
     }
   }
 
+
+
+    async ModifyUser(id, newData) {
+        try {
+            const user = await userModel.findById(id);
+            if (!user) {
+                throw new Error("Usuario no encontrado");
+            }
+    
+            if (newData.isActive === true) {
+                user.isActive = false;
+            }else{
+                user.isActive = newData.isActive;
+            }
+       
+            Object.assign(user, newData);
+    
+            const updatedUser = await user.save();
+            return updatedUser;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    
+
+    async DeleteUser(id){
+        try {
+            const deleteUser = await userModel.findByIdAndDelete(id);
+            return deleteUser
+        } catch (error) {
+            throw error
+        }
+
   async CreateNewAdmin(name, email, password) {
     try {
       if (!validaNameUser(name)) {
@@ -54,23 +88,7 @@ class UserController {
         password: hash,
         role: "admin",
         isActive: true,
-      });
-
-      const savedUser = await newUser.save();
-      return savedUser;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async DeleteUser(id) {
-    try {
-      const deleteUser = await userModel.findByIdAndDelete(id);
-      return deleteUser;
-    } catch (error) {
-      throw error;
-    }
-  }
+      });  
 }
 
 module.exports = UserController;
