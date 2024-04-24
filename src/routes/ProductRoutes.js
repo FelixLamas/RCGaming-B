@@ -71,6 +71,19 @@ const ProductRoutes = (base, app) => {
       });
     }
   });
+
+  app.post(`${base}/update/:id`, async(req, res)=>{
+    try {
+      const {_id}=req.params;
+      const newData=req.body;
+      await prodController.upDateProduct(_id, newData);
+
+      return res.status(201).json({message: "Se actualizó el producto exitosamente"})
+    } catch (error) {
+      console.error("Error al intentar actualizar el producto", error)
+    }
+  });
+
 };
 
 module.exports = ProductRoutes;
