@@ -66,16 +66,16 @@ class ProductController {
     }
   }
 
-  async GetById(id){
+  async GetById(id) {
     try {
-        const product = await ProductModel.findById(id);
-        return product;
+      const product = await ProductModel.findById(id);
+      return product;
     } catch (error) {
-        throw error;
+      throw error;
     }
-}
+  }
 
-  async GetNewsProducts(){
+  async GetNewsProducts() {
     try {
       let ProductsNews = [];
 
@@ -98,6 +98,31 @@ class ProductController {
       throw error;
     }
   }
+
+  async Update(_id, newData) {
+    try {
+      const product = await ProductModel.findById(_id);
+
+      if (!product) {
+        throw new Error("Producto no encontrado");
+      }
+
+      product.name = newData.name;
+      product.category_Id = newData.category_Id;
+      product.description = newData.description;
+      product.price = newData.price;
+      product.stock = newData.stock;
+      product.imageUrl = newData.imageUrl;
+      product.characteristic = newData.characteristic;
+      product.outstanding = newData.outstanding;
+      product.stockUpdateDate = newData.stockUpdateDate;
+
+      await product.save();
+    } catch (error) {
+      throw error;
+    }
+  };
+
 }
 
 module.exports = ProductController;
