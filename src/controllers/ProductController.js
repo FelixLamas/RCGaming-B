@@ -8,7 +8,6 @@ const {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
-  validateStockUpdateDate,
 } = require("../util/helpers");
 
 class ProductController {
@@ -20,8 +19,7 @@ class ProductController {
     stock,
     imageUrl,
     characteristic,
-    outstanding,
-    stockUpdateDate
+    outstanding
   ) {
     if (!validateName(name)) {
       throw new Error("Nombre del producto invalido.");
@@ -44,9 +42,7 @@ class ProductController {
     if (!validateCharacteristic(characteristic)) {
       throw new Error("La catasreristica del producto invalida.");
     }
-    if (!validateStockUpdateDate(stockUpdateDate)) {
-      throw new Error("La fecha de actualizacion del producto invalida.");
-    }
+
     try {
       const newProduct = new ProductModel({
         name: name,
@@ -57,7 +53,7 @@ class ProductController {
         imageUrl: imageUrl,
         characteristic: characteristic,
         outstanding: outstanding,
-        stockUpdateDate: stockUpdateDate,
+        stockUpdateDate: new Date(),
       });
 
       await newProduct.save();
@@ -66,16 +62,16 @@ class ProductController {
     }
   }
 
-  async GetById(id){
+  async GetById(id) {
     try {
-        const product = await ProductModel.findById(id);
-        return product;
+      const product = await ProductModel.findById(id);
+      return product;
     } catch (error) {
-        throw error;
+      throw error;
     }
-}
+  }
 
-  async GetNewsProducts(){
+  async GetNewsProducts() {
     try {
       let ProductsNews = [];
 

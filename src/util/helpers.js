@@ -58,10 +58,6 @@ function validateCharacteristic(characteristic) {
   return true;
 }
 
-function validateStockUpdateDate(stockUpdateDate) {
-  const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
-  return regexFecha.test(stockUpdateDate) && stockUpdateDate > "2024-04-16";
-}
 module.exports = {
   validateName,
   validateCategory,
@@ -70,7 +66,7 @@ module.exports = {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
-  validateStockUpdateDate,
+
   validateEmail,
   validatePassword,
   validaNameUser,
