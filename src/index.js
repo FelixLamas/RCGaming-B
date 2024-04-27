@@ -5,6 +5,7 @@ const path = require("path");
 const dataBaseC = require("./dbConection.js");
 const ProductRoutes = require("./routes/ProductRoutes.js");
 const UserRoutes = require("./routes/UserRoutes.js");
+const OrderRoutes = require("./routes/OrderRoutes.js");
 const app = express();
 
 require("dotenv").config();
@@ -32,3 +33,4 @@ app.get("/test", async (req, res) => {
 
 UserRoutes("/users", app);
 ProductRoutes("/products", app);
+OrderRoutes("/order",app)
