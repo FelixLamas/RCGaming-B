@@ -128,6 +128,15 @@ class ProductController {
     }
   };
 
+  async DeleteProduct(_id) {
+    try {
+      await ProductModel.findByIdAndDelete(_id);
+
+    } catch (error) {
+      throw error;
+    }
+  };
+
 }
 
 module.exports = ProductController;
