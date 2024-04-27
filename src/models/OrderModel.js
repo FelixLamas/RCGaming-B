@@ -18,7 +18,8 @@ const ItemSchema = new Schema({
 
 const OrderSchema = new Schema({
     user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "user",
         required: true
     },
     items: [ItemSchema], // Definido como un array de objetos usando el esquema ItemSchema

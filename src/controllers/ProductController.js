@@ -97,7 +97,9 @@ class ProductController {
 
   async GetAllProducts() {
     try {
-      const allProducts = await ProductModel.find();
+      const allProducts = await ProductModel.find()
+      .populate('category_id','name')
+      .exec();
       return allProducts;
     } catch (error) {
       throw error;
