@@ -97,6 +97,19 @@ const ProductRoutes = (base, app) => {
       console.error("Error al intentar actualizar el producto", error);
     }
   });
+
+  app.delete(`${base}/delete/:id`, async (req, res) => {
+    try {
+      const { id } = req.params;
+      await prodController.DeleteProduct(id);
+
+      return res
+        .status(201)
+        .json({ message: "Se eliminó el producto exitosamente" });
+    } catch (error) {
+      console.error("Error al intentar eliminar el producto", error);
+    }
+  });
 };
 
 module.exports = ProductRoutes;
