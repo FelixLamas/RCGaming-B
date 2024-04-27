@@ -18,8 +18,8 @@ function validateName(name) {
   }
 }
 
-function validateCategory(category) {
-  return category.trim().length !== 0 && category !== undefined;
+function validateCategory(category_id) {
+  return category_id.trim().length !== 0 && category_id !== undefined;
 }
 
 function validateDescription(description) {
