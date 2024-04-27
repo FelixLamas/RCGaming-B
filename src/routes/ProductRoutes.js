@@ -14,7 +14,6 @@ const ProductRoutes = (base, app) => {
         imageUrl,
         characteristic,
         outstanding,
-        stockUpdateDate,
       } = req.body;
       await prodController.Create(
         name,
@@ -24,8 +23,7 @@ const ProductRoutes = (base, app) => {
         stock,
         imageUrl,
         characteristic,
-        outstanding,
-        stockUpdateDate
+        outstanding
       );
       res.status(201).json({ message: "Existo al crear el producto" });
     } catch (error) {
@@ -36,17 +34,18 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-
-  app.get(`${base}/:id`, async(req, res)=>{
+  app.get(`${base}/:id`, async (req, res) => {
     try {
-        const {id}=req.params;
-        const response=await prodController.GetById(id);
-        return res.status(200).json(response);
+      const { id } = req.params;
+      const response = await prodController.GetById(id);
+      return res.status(200).json(response);
     } catch (error) {
-        console.error(`Error al obtener el producto con id`, error);
-        return res.status(500).json({message:"Ocurrió un error al intentar obtener el producto"}); 
+      console.error(`Error al obtener el producto con id`, error);
+      return res
+        .status(500)
+        .json({ message: "Ocurrio un error al intentar obtener el producto" });
     }
-});
+  });
 
   app.get(`${base}/news/product`, async (req, res) => {
     try {
@@ -55,7 +54,8 @@ const ProductRoutes = (base, app) => {
     } catch (error) {
       console.error("Error al obtener las productos destacados", error);
       return res.status(500).json({
-        message: "Ocurrió un error al intentar obtener los productos destacados",
+        message:
+          "Ocurrió un error al intentar obtener los productos destacados",
       });
     }
   });
@@ -84,18 +84,19 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-  app.put(`${base}/update/:id`, async(req, res)=>{
+  app.put(`${base}/update/:id`, async (req, res) => {
     try {
-      const {id}=req.params;
-      const newData=req.body;
+      const { id } = req.params;
+      const newData = req.body;
       await prodController.UpdateProduct(id, newData);
 
-      return res.status(201).json({message: "Se actualizó el producto exitosamente"})
+      return res
+        .status(201)
+        .json({ message: "Se actualizó el producto exitosamente" });
     } catch (error) {
-      console.error("Error al intentar actualizar el producto", error)
+      console.error("Error al intentar actualizar el producto", error);
     }
   });
-
 };
 
 module.exports = ProductRoutes;

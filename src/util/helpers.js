@@ -1,14 +1,25 @@
-const regexEmail=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const regexPassword=/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/;
+const regexEmail =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const regexPassword =
+  /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/;
 
-function validateEmail(email){
-    return regexEmail.test(email)
+function validateEmail(email) {
+  return regexEmail.test(email);
 }
 
-function validatePassword(password){
-    return  regexPassword.test(password)
+function validatePassword(password) {
+  return regexPassword.test(password);
 }
 
+function validaNameUser(nameUser) {
+  const regexName =
+    /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+(?:\s+[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+)*$/;
+  return (
+    nameUser.trim().length >= 8 &&
+    nameUser.trim().length <= 100 &&
+    regexName.test(nameUser)
+  );
+}
 
 function validateName(name) {
   if (name.trim().length >= 4 && name.trim().length <= 50) {
@@ -47,10 +58,6 @@ function validateCharacteristic(characteristic) {
   return true;
 }
 
-function validateStockUpdateDate(stockUpdateDate) {
-  const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
-  return regexFecha.test(stockUpdateDate) && stockUpdateDate > "2024-04-16";
-}
 module.exports = {
   validateName,
   validateCategory,
@@ -59,8 +66,8 @@ module.exports = {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
-  validateStockUpdateDate,
-  validateEmail,
-  validatePassword
 
+  validateEmail,
+  validatePassword,
+  validaNameUser,
 };
