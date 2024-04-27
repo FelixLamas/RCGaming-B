@@ -7,7 +7,7 @@ const ProductRoutes = (base, app) => {
     try {
       const {
         name,
-        category_Id,
+        category_id,
         description,
         price,
         stock,
@@ -17,7 +17,7 @@ const ProductRoutes = (base, app) => {
       } = req.body;
       await prodController.Create(
         name,
-        category_Id,
+        category_id,
         description,
         price,
         stock,
@@ -25,12 +25,12 @@ const ProductRoutes = (base, app) => {
         characteristic,
         outstanding
       );
-      res.status(201).json({ mesage: "Existo al crear el producto" });
+      res.status(201).json({ message: "Existo al crear el producto" });
     } catch (error) {
-      console.error("Error al crear el producto", error);
+      console.error("Error al intentar crear el producto", error);
       return res
         .status(500)
-        .json({ mesage: "Ocurrio un error al crear el producto" });
+        .json({ message: "Ocurrió un error al crear el producto" });
     }
   });
 
@@ -55,7 +55,19 @@ const ProductRoutes = (base, app) => {
       console.error("Error al obtener las productos destacados", error);
       return res.status(500).json({
         message:
-          "Ocurrio un error al intentar obtener los productos destacados",
+          "Ocurrió un error al intentar obtener los productos destacados",
+      });
+    }
+  });
+
+  app.get(`${base}`, async (req, res) => {
+    try {
+      const response = await prodController.GetAllProducts();
+      return res.status(200).json(response);
+    } catch (error) {
+      console.error("Error al obtener todos los productos", error);
+      return res.status(500).json({
+        message: "Ocurrió un error al intentar obtener todos los productos",
       });
     }
   });
@@ -65,25 +77,26 @@ const ProductRoutes = (base, app) => {
       const response = await prodController.GetAllCategories();
       return res.status(200).json(response);
     } catch (error) {
-      console.error("Error al obtener las categorias", error);
+      console.error("Error al obtener las categorías", error);
       return res.status(500).json({
-        message: "Ocurrio un error al intentar obtener las categorias",
+        message: "Ocurrió un error al intentar obtener las categorías",
       });
     }
   });
 
-  app.post(`${base}/update/:id`, async(req, res)=>{
+  app.put(`${base}/update/:id`, async (req, res) => {
     try {
-      const {_id}=req.params;
-      const newData=req.body;
-      await prodController.upDateProduct(_id, newData);
+      const { id } = req.params;
+      const newData = req.body;
+      await prodController.UpdateProduct(id, newData);
 
-      return res.status(201).json({message: "Se actualizó el producto exitosamente"})
+      return res
+        .status(201)
+        .json({ message: "Se actualizó el producto exitosamente" });
     } catch (error) {
-      console.error("Error al intentar actualizar el producto", error)
+      console.error("Error al intentar actualizar el producto", error);
     }
   });
-
 };
 
 module.exports = ProductRoutes;
