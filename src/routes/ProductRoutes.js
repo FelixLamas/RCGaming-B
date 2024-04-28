@@ -84,6 +84,20 @@ const ProductRoutes = (base, app) => {
     }
   });
 
+
+  app.get(`${base}/category/:categoryId`, async (req, res) => {
+    try {
+        const { categoryId } = req.params;
+        const response = await prodController.GetProductsByCategory(categoryId);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("Error al obtener los productos de la categoría", error);
+        return res.status(500).json({
+            message: "Ocurrió un error al intentar obtener los productos de la categoría",
+        });
+    }
+  });
+
   app.put(`${base}/update/:id`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const { id } = req.params;

@@ -106,6 +106,20 @@ class ProductController {
     }
   }
 
+  async GetProductsByCategory(categoryId) {
+    try {
+        const category = await CategoriesModel.findById(categoryId);
+        if (!category) {
+            throw new Error("Categoría no encontrada");
+        }
+
+        const products = await ProductModel.find({ category_id: categoryId });
+        return products;
+    } catch (error) {
+        throw error;
+    }
+  }
+
   async UpdateProduct(_id, newData) {
     try {
       const product = await ProductModel.findById(_id);
