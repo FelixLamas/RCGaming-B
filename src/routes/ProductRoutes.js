@@ -1,9 +1,9 @@
 const ProductController = require("../controllers/ProductController");
-
+const Auth = require("../util/Auth");
 const ProductRoutes = (base, app) => {
   const prodController = new ProductController();
 
-  app.post(`${base}`, async (req, res) => {
+  app.post(`${base}`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const {
         name,
@@ -84,7 +84,7 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-  app.put(`${base}/update/:id`, async (req, res) => {
+  app.put(`${base}/update/:id`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const { id } = req.params;
       const newData = req.body;
@@ -98,18 +98,23 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-  app.delete(`${base}/delete/:id`, async (req, res) => {
-    try {
-      const { id } = req.params;
-      await prodController.DeleteProduct(id);
+  app.delete(
+    `${base}/delete/:id`,
+    Auth.isAuth,
+    Auth.isAdmin,
+    async (req, res) => {
+      try {
+        const { id } = req.params;
+        await prodController.DeleteProduct(id);
 
-      return res
-        .status(201)
-        .json({ message: "Se eliminó el producto exitosamente" });
-    } catch (error) {
-      console.error("Error al intentar eliminar el producto", error);
+        return res
+          .status(201)
+          .json({ message: "Se eliminó el producto exitosamente" });
+      } catch (error) {
+        console.error("Error al intentar eliminar el producto", error);
+      }
     }
-  });
+  );
 };
 
 module.exports = ProductRoutes;
