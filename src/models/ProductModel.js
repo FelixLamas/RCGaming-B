@@ -8,9 +8,10 @@ const ProductSchema = new Schema({
     minLength: 4,
     maxLength: 50,
   },
-  category_Id: {
-    type: String,
-    require: [true, "La categoria del producto es requerida"],
+  category_id: {
+    type: Schema.Types.ObjectId,
+    ref:"categories",
+    require: [true, "La categoría del producto es requerida"],
   },
   description: {
     type: String,
@@ -35,11 +36,12 @@ const ProductSchema = new Schema({
     require: [true, "La imagen del producto es requerida"],
   },
   characteristic: [
-    {
-      type: String,
-      minLength: 4,
-      maxLength: 1000,
-    },
+      {
+        type: String,
+        require: [true, "La característica del producto es requerida"],
+        min: 4,
+        max: 200,
+      }
   ],
   outstanding: {
     type: Boolean,
@@ -48,7 +50,7 @@ const ProductSchema = new Schema({
     type: Date,
     require: [
       true,
-      "La fecha de actualizacion del stock del producto es requerida",
+      "La fecha de actualización del stock del producto es requerida",
     ],
   },
 });

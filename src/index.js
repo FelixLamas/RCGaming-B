@@ -5,6 +5,7 @@ const path = require("path");
 const dataBaseC = require("./dbConection.js");
 const ProductRoutes = require("./routes/ProductRoutes.js");
 const UserRoutes = require("./routes/UserRoutes.js");
+const OrderRoutes = require("./routes/OrderRoutes.js");
 const app = express();
 
 require("dotenv").config();
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 //ruta de prueba para el back
 app.get("/test", async (req, res) => {
   try {
-    return res.status(200).json({ mesage: "realizo la consulta ok" });
+    return res.status(200).json({ message: "realizo la consulta ok" });
   } catch (error) {
     console.error(error);
   }
@@ -32,3 +33,4 @@ app.get("/test", async (req, res) => {
 
 UserRoutes("/users", app);
 ProductRoutes("/products", app);
+OrderRoutes("/order",app)

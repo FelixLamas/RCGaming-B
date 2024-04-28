@@ -25,7 +25,7 @@ class ProductController {
       throw new Error("Nombre del producto invalido.");
     }
     if (!validateCategory(category_id)) {
-      throw new Error("Categoria del producto invalida.");
+      throw new Error("Categoría del producto invalida.");
     }
     if (!validateDescription(description)) {
       throw new Error("Descripción del producto invalido.");
@@ -40,7 +40,7 @@ class ProductController {
       throw new Error("URL de la imagen del producto invalida.");
     }
     if (!validateCharacteristic(characteristic)) {
-      throw new Error("La catasreristica del producto invalida.");
+      throw new Error("La característica del producto invalida.");
     }
 
     try {
@@ -95,7 +95,18 @@ class ProductController {
     }
   }
 
-  async Update(_id, newData) {
+  async GetAllProducts() {
+    try {
+      const allProducts = await ProductModel.find()
+      .populate('category_id','name')
+      .exec();
+      return allProducts;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async UpdateProduct(_id, newData) {
     try {
       const product = await ProductModel.findById(_id);
 
@@ -104,7 +115,7 @@ class ProductController {
       }
 
       product.name = newData.name;
-      product.category_Id = newData.category_Id;
+      product.category_id = newData.category_id;
       product.description = newData.description;
       product.price = newData.price;
       product.stock = newData.stock;
@@ -114,6 +125,15 @@ class ProductController {
       product.stockUpdateDate = newData.stockUpdateDate;
 
       await product.save();
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  async DeleteProduct(_id) {
+    try {
+      await ProductModel.findByIdAndDelete(_id);
+
     } catch (error) {
       throw error;
     }
