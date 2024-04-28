@@ -9,7 +9,8 @@ const ProductSchema = new Schema({
     maxLength: 50,
   },
   category_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref:"categories",
     require: [true, "La categoría del producto es requerida"],
   },
   description: {

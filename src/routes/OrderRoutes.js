@@ -25,6 +25,17 @@ const OrderRoutes = (base, app)=>{
         }
     });
 
+    app.get(`${base}`, async (req,res)=>{
+        try{
+            const response = await orderController.GetOrder();
+            return res.status(200).json(response);
+        }catch(error){
+            return res.status(500).json({
+                message:"Ocurrio un error al traer todas las ordenes"
+            })
+        }
+    })
+
 }
 
 module.exports=OrderRoutes;
