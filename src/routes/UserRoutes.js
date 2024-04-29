@@ -26,7 +26,6 @@ const UserRoutes = (base, app) => {
       await userController.CreateNewUser(name, email, password);
       return res.status(201).json({ message: "Exito al crear el usuario" });
     } catch (error) {
-      //console.error("Error al crear un nuevo usuario-->",error)
       return res
         .status(500)
         .json({ message: "Ocurrio un error al intentar crear el usuario" });
@@ -53,8 +52,7 @@ const UserRoutes = (base, app) => {
     async (req, res) => {
       try {
         const id = req.params.id;
-        const isActive = req.body.isActive;
-        await userController.ActivateUser(id, isActive);
+        await userController.ModifyUser(id);
         return res
           .status(200)
           .json({ message: "Exito al cambiar el estado del usuario" });
@@ -113,6 +111,17 @@ const UserRoutes = (base, app) => {
         .json({ message: "Error al modificar la contraseña" });
     }
   });
+
+
+  app.get(`${base}/getUsers`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
+    try {
+      const users = await userController.getAllUsers();
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ message: "Error al obtener los usuarios" });
+    }
+  });
+  
 };
 
 module.exports = UserRoutes;
