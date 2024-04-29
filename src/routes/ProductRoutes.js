@@ -74,7 +74,8 @@ const ProductRoutes = (base, app) => {
 
   app.get(`${base}/categories/product`, async (req, res) => {
     try {
-      const response = await prodController.GetAllCategories();
+      const {filterC}=req.query;
+      const response = await prodController.GetAllCategories(filterC);
       return res.status(200).json(response);
     } catch (error) {
       console.error("Error al obtener las categorías", error);

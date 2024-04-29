@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const CategoriesModel = require("../models/CategoriesModel");
 const ProductModel = require("../models/ProductModel");
 const {
@@ -83,13 +84,16 @@ class ProductController {
     }
   }
 
-  async GetAllCategories() {
+  async GetAllCategories(filterC) {
     try {
       let CategoriesResp = [];
 
-      CategoriesResp = await CategoriesModel.find();
+    const filter = filterC
+      ? { _id: new mongoose.Types.ObjectId(filterC) }
+      : {};
 
-      return CategoriesResp;
+    CategoriesResp = await CategoriesModel.find(filter);
+    return CategoriesResp;
     } catch (error) {
       throw error;
     }
@@ -98,8 +102,8 @@ class ProductController {
   async GetAllProducts() {
     try {
       const allProducts = await ProductModel.find()
-      .populate('category_id','name')
-      .exec();
+        .populate('category_id', 'name')
+        .exec();
       return allProducts;
     } catch (error) {
       throw error;
