@@ -1,4 +1,5 @@
-const OrderModel = require("../models/OrderModel")
+const OrderModel = require("../models/OrderModel");
+const ProductModel = require("../models/ProductModel");
 
 
 class OrderController {
@@ -9,6 +10,14 @@ class OrderController {
         totalPrice,
     ) {
         try {
+            await Promise.all(
+                items.map(async item => {
+                    const product = await ProductModel.findById(item.id);
+                    product.stock -= item.quantity;
+                    await product.save();
+                })
+            );
+
             const newOrder = new OrderModel({
                 user_id: user_id,
                 items: items,
@@ -30,7 +39,7 @@ class OrderController {
                 .exec();
             const formattedOrders = allOrder.map(order => ({
                 ...order.toObject(),
-                date: order.date.toLocaleString() // Formatear la fecha
+                date: order.date.toLocaleString()
             }));
 
             return formattedOrders;
@@ -38,7 +47,6 @@ class OrderController {
             throw (error)
         }
     }
-
 }
 
 module.exports = OrderController;

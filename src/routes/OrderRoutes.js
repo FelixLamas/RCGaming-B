@@ -11,6 +11,7 @@ const OrderRoutes = (base, app)=>{
                 items,
                 totalPrice,
             } = req.body;
+            console.log(items)
             await orderController.CreateOrder(
                 user_id,
                 items,
@@ -27,7 +28,8 @@ const OrderRoutes = (base, app)=>{
 
     app.get(`${base}`, async (req,res)=>{
         try{
-            const response = await orderController.GetOrder();
+            const{search}=req.query;
+            const response = await orderController.GetOrder(search);
             return res.status(200).json(response);
         }catch(error){
             return res.status(500).json({
