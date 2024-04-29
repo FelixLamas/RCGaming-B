@@ -79,20 +79,20 @@ class UserController {
     }
   }
 
-  async ModifyUser(id, newData) {
+  async ModifyUser(id) {
     try {
       const user = await userModel.findById(id);
       if (!user) {
         throw new Error("Usuario no encontrado");
       }
 
-      if (newData.isActive === true) {
+      if (user.isActive === true) {
         user.isActive = false;
       } else {
-        user.isActive = newData.isActive;
+        user.isActive = true;
       }
 
-      Object.assign(user, newData);
+      Object.assign(user);
 
       const updatedUser = await user.save();
       return updatedUser;
@@ -208,6 +208,15 @@ class UserController {
       return res.status(200).json({
         message: "Exito,se realizo cambio de contraseña",
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      const users = await userModel.find(); 
+      return users;
     } catch (error) {
       throw error;
     }
