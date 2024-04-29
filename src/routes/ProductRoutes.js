@@ -74,7 +74,7 @@ const ProductRoutes = (base, app) => {
 
   app.get(`${base}/categories/product`, async (req, res) => {
     try {
-      const {filterC}=req.query;
+      const { filterC } = req.query;
       const response = await prodController.GetAllCategories(filterC);
       return res.status(200).json(response);
     } catch (error) {
@@ -85,17 +85,17 @@ const ProductRoutes = (base, app) => {
     }
   });
 
-
   app.get(`${base}/category/:categoryId`, async (req, res) => {
     try {
-        const { categoryId } = req.params;
-        const response = await prodController.GetProductsByCategory(categoryId);
-        return res.status(200).json(response);
+      const { categoryId } = req.params;
+      const response = await prodController.GetProductsByCategory(categoryId);
+      return res.status(200).json(response);
     } catch (error) {
-        console.error("Error al obtener los productos de la categoría", error);
-        return res.status(500).json({
-            message: "Ocurrió un error al intentar obtener los productos de la categoría",
-        });
+      console.error("Error al obtener los productos de la categoría", error);
+      return res.status(500).json({
+        message:
+          "Ocurrió un error al intentar obtener los productos de la categoría",
+      });
     }
   });
 
@@ -123,7 +123,7 @@ const ProductRoutes = (base, app) => {
         await prodController.DeleteProduct(id);
 
         return res
-          .status(201)
+          .status(200)
           .json({ message: "Se eliminó el producto exitosamente" });
       } catch (error) {
         console.error("Error al intentar eliminar el producto", error);
