@@ -115,7 +115,6 @@ const UserRoutes = (base, app) => {
   app.get(`${base}/getUsers`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const users = await userController.getAllUsers();
-      // Excluir el campo de contraseña antes de enviar la respuesta
       const usersWithoutPassword = users.map(user => {
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;
