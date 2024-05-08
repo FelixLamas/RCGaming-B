@@ -215,7 +215,7 @@ class UserController {
 
   async getAllUsers() {
     try {
-      const users = await userModel.find(); 
+      const users = await userModel.find({}, '-password'); 
       return users;
     } catch (error) {
       throw error;
