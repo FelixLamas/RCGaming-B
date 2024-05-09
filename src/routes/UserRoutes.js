@@ -111,21 +111,15 @@ const UserRoutes = (base, app) => {
         .json({ message: "Error al modificar la contraseña" });
     }
   });
-  
+
   app.get(`${base}/getUsers`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const users = await userController.getAllUsers();
-      const usersWithoutPassword = users.map(user => {
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword;
-      });
-      return res.status(200).json(usersWithoutPassword);
+      return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json({ message: "Error al obtener los usuarios" });
     }
   });
-
-
 };
 
 module.exports = UserRoutes;
