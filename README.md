@@ -49,7 +49,15 @@ El proyecto backend está estructurado de la siguiente manera:
 - **/middlewares**: Contiene los middlewares de Express para funciones comunes como la autenticación.
 - **/config**: Contiene la configuración del servidor y las variables de entorno.
 
-El backend utiliza las siguientes dependencias/librerías: - bcrypt v5.1.1 - cors v2.8.5 - dotenv v16.4.5 - express v4.19.2 - jsonwebtoken v9.0.2 - mongoose v8.2.1 - morgan v1.10.0 - nodemailer v6.9.13
+El backend utiliza las siguientes dependencias/librerías:
+- bcrypt v5.1.1
+- cors v2.8.5
+- dotenv v16.4.5
+- express v4.19.2
+- jsonwebtoken v9.0.2
+- mongoose v8.2.1
+- morgan v1.10.0
+- nodemailer v6.9.13
 
 ## Colaboradores
 
