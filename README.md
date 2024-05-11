@@ -1,27 +1,71 @@
-ROLLING CODE SCHOOL - PROYECTO FINAL
+# Backend del Proyecto eCommerce RCGames
 
-Nombre del proyecto: "RCGames"
+¡Bienvenido al backend del proyecto eCommerce RCGames!
 
-Proyecto de Backend para el sitio de RCGames, en el cual se almacenan todos los datos del mismo. El mismo consta de 4 colecciones (categorias, productos, usuarios, ordenes).
+Este backend es parte del curso de **Full Stack** de **RollingCode** y está desarrollado utilizando Visual Studio Code con las siguientes tecnologías:
 
-Comandos
-Cuando se clone este repositorio se deben ejecutar los siguientes comandos:
-Para instalar las dependecias
-npm i
+- **Backend**: JavaScript con Node.js y Express.js para el servidor.
+- **Base de Datos**: MongoDB para almacenar los datos del eCommerce.
 
-Para ejecutar el backend
-Primero cambiar a la rama dev y luego hacer el siguiente comando: npm run dev
+## Funcionalidades
 
-Dependencias/Librerias
+El backend del proyecto eCommerce RCGames proporciona las siguientes funcionalidades:
 
-bcrypt ver5.1.1
-cors ver 2.8.5
-dotenv ver 16.4.5
-express ver 4.19.2
-jsonwebtoken ver 9.0.2
-mongoose ver 8.2.1
-morgan ver 1.10.0
-nodemailer ver 6.9.13
+- **Gestión de Usuarios**: Permite a los administradores gestionar usuarios, productos y órdenes de compra.
+- **Autenticación**: Permite a los usuarios registrarse, iniciar sesión y cerrar sesión en el sistema.
+- **Base de Datos**: Utiliza MongoDB para almacenar y gestionar la información del eCommerce.
 
-Desarrolladores Felix Lamas, Cardoso Rodrigo, Ladetto Martin, Barrionuevo Esteban, Herrera Jimena.
-Estado del proyecto: DEMO
+## Configuración
+
+Para ejecutar el backend del proyecto eCommerce RCGames en tu máquina local, sigue estos pasos:
+
+1. **Clonar el Repositorio**: Clona este repositorio desde GitHub ejecutando el siguiente comando en tu terminal:
+
+    ```
+    git clone <URL del repositorio>
+    ```
+
+2. **Instalar Dependencias**: Navega hasta el directorio del backend en tu terminal y ejecuta el siguiente comando para instalar todas las dependencias necesarias:
+
+    ```
+    npm install
+    ```
+
+3. **Configurar Variables de Entorno**: Crea un archivo `.env` en el directorio raíz del backend y configura las variables de entorno necesarias, como la conexión a la base de datos MongoDB y las claves secretas para la autenticación.
+
+4. **Iniciar el Servidor**: Una vez configurado, puedes iniciar el servidor ejecutando el siguiente comando:
+
+    ```
+    npm run dev
+    ```
+
+## Estructura del Proyecto
+
+El proyecto backend está estructurado de la siguiente manera:
+
+- **/models**: Contiene los modelos de datos de MongoDB utilizando Mongoose.
+- **/routes**: Contiene las rutas de Express para gestionar las solicitudes HTTP.
+- **/controllers**: Contiene los controladores de Express para manejar la lógica de negocio.
+- **/middlewares**: Contiene los middlewares de Express para funciones comunes como la autenticación.
+- **/config**: Contiene la configuración del servidor y las variables de entorno.
+
+El backend utiliza las siguientes dependencias/librerías:
+- bcrypt v5.1.1
+- cors v2.8.5
+- dotenv v16.4.5
+- express v4.19.2
+- jsonwebtoken v9.0.2
+- mongoose v8.2.1
+- morgan v1.10.0
+- nodemailer v6.9.13
+
+## Colaboradores
+
+Este backend fue creado por:
+
+- Esteban Ignacio Barrionuevo [Github](https://github.com/3steban99)
+- Jimena Herrera [Github](https://github.com/jimenaherrera22)
+- Rodrigo Cardozo [Github](https://github.com/rodrigocardoso080488)
+- Felix Lamas [Github](https://github.com/FelixLamas)
+- Martin Ladetto [Github](https://github.com/mladetto)
+

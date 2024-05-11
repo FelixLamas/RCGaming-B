@@ -112,7 +112,6 @@ const UserRoutes = (base, app) => {
     }
   });
 
-
   app.get(`${base}/getUsers`, Auth.isAuth, Auth.isAdmin, async (req, res) => {
     try {
       const users = await userController.getAllUsers();
@@ -121,7 +120,6 @@ const UserRoutes = (base, app) => {
       return res.status(500).json({ message: "Error al obtener los usuarios" });
     }
   });
-  
 };
 
 module.exports = UserRoutes;

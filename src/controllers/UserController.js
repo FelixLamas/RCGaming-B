@@ -160,7 +160,7 @@ class UserController {
         process.env.SECRET_KEY,
         { expiresIn: "2h" }
       );
-      const confirmationLink = `http://localhost:5173/reset_password?token=${token}&email=${email}`;
+      const confirmationLink = `https://rc-games.netlify.app/reset_password?token=${token}&email=${email}`;
 
       const mailOptions = {
         from: "rcgaming.24@outlook.com",
@@ -215,7 +215,7 @@ class UserController {
 
   async getAllUsers() {
     try {
-      const users = await userModel.find(); 
+      const users = await userModel.find({}, '-password'); 
       return users;
     } catch (error) {
       throw error;

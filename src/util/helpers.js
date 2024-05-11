@@ -66,7 +66,6 @@ module.exports = {
   validateStock,
   validateImageUrl,
   validateCharacteristic,
-
   validateEmail,
   validatePassword,
   validaNameUser,
